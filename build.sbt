@@ -19,7 +19,7 @@ addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17")
 
 
 lazy val checkDoublePackage = taskKey[Unit]("Checks all scala sources use a double declaration")
-
+lazy val checkVersion = taskKey[Unit]("Check that the git tree matches the correct version")
 /**
   * This on load trigger is used to set parameters in teamcity.
   * It is only executed within teamcity and can be ignored otherwise.
@@ -112,10 +112,7 @@ lazy val commonSettings = inConfig(SerialIntegrationTest)(Defaults.testTasks) ++
 
   releaseProcess := Seq[ReleaseStep](
     checkSnapshotDependencies,
-    inquireVersions,
     runTest,
-    setReleaseVersion,
-    commitReleaseVersion,
     tagRelease,
     pushChanges
   ),
@@ -220,7 +217,8 @@ lazy val commonSettings = inConfig(SerialIntegrationTest)(Defaults.testTasks) ++
   // required for AJC compile time weaving
   javacOptions in Compile += "-g",
   javaOptions in run ++= (AspectjKeys.weaverOptions in Aspectj).value,
-  javaOptions in Test ++= (AspectjKeys.weaverOptions in Aspectj).value
+  javaOptions in Test ++= (AspectjKeys.weaverOptions in Aspectj).value,
+  git.useGitDescribe := true
 )
 
 val aopMerge: sbtassembly.MergeStrategy = new sbtassembly.MergeStrategy {
@@ -302,7 +300,7 @@ lazy val marathon = (project in file("."))
   .configs(UnstableTest)
   .configs(UnstableIntegrationTest)
   .enablePlugins(GitBranchPrompt, JavaServerAppPackaging, DockerPlugin,
-    CopyPasteDetector, RamlGeneratorPlugin, DoublePackagePlugin)
+    CopyPasteDetector, RamlGeneratorPlugin, DoublePackagePlugin, GitVersioning)
   .dependsOn(`plugin-interface`)
   .settings(commonSettings: _*)
   .settings(formatSettings: _*)
