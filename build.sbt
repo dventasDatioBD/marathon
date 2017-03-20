@@ -218,7 +218,7 @@ lazy val commonSettings = inConfig(SerialIntegrationTest)(Defaults.testTasks) ++
   javacOptions in Compile += "-g",
   javaOptions in run ++= (AspectjKeys.weaverOptions in Aspectj).value,
   javaOptions in Test ++= (AspectjKeys.weaverOptions in Aspectj).value,
-  // non-tagged builds use this.
+  // non-tagged builds use this. Should _always_ end in snapshot.
   git.baseVersion := "1.5.0-SNAPSHOT"
 )
 
