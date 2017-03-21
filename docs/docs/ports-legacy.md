@@ -1,8 +1,16 @@
 ---
-title: Ports
+title: Ports (Legacy)
 ---
 
 # Ports
+
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    Several fields of the ports API have been deprecated with Marathon v1.5 in favor of the updated [Networking API](networking.html).
+    Use this deprecated API at your own risk. Deprecated fields may be removed in a future Marathon release.
+    We appreciate <a href="https://jira.mesosphere.com/browse/MARATHON-7026">your feedback</a>!
+</div>
+
 
 Port configuration for applications in Marathon can be confusing and there is [an outstanding issue](https://github.com/mesosphere/marathon/issues/670) to redesign the ports API. This page attempts to explain more clearly how they work.
 
