@@ -19,7 +19,7 @@ addCompilerPlugin("org.psywerx.hairyfotr" %% "linter" % "0.1.17")
 
 
 lazy val checkDoublePackage = taskKey[Unit]("Checks all scala sources use a double declaration")
-lazy val checkVersion = taskKey[Unit]("Check that the git tree matches the correct version")
+
 /**
   * This on load trigger is used to set parameters in teamcity.
   * It is only executed within teamcity and can be ignored otherwise.
